@@ -1,31 +1,37 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
-
-
-Method1();
-Method2();
+﻿
+await callMethod();
 Console.ReadKey();
 
-static async Task Method1()
+static async Task callMethod()
 {
+    Method2();
+    var count = await Method1();
+    Method3(count);
+}
+
+static async Task<int> Method1()
+{
+    int count = 0;
     await Task.Run(() =>
     {
         for (int i = 0; i < 100; i++)
         {
             Console.WriteLine(" Method 1");
-            // Do something
-            Task.Delay(100).Wait();
+            count += 1;
         }
     });
+    return count;
 }
-
 
 static void Method2()
 {
     for (int i = 0; i < 25; i++)
     {
         Console.WriteLine(" Method 2");
-        // Do something
-        Task.Delay(100).Wait();
     }
+}
+
+static void Method3(int count)
+{
+    Console.WriteLine("Total count is " + count);
 }
